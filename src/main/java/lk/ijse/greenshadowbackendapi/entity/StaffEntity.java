@@ -38,4 +38,6 @@ public class StaffEntity {
     private List<MonitoringLogServiceEntity> logServices;
     @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<VehicleEntity> vehicles;
+    @ManyToMany(mappedBy = "staffMembers")
+    private List<FieldEntity> fields;
 }

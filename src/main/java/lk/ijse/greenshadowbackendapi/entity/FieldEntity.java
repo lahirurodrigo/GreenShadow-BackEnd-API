@@ -22,8 +22,16 @@ public class FieldEntity {
     private String fieldImage01;
     @Column(columnDefinition = "LONGTEXT")
     private String fieldImage02;
-    @OneToMany(mappedBy = "fields", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<CropEntity> crops;
+    @ManyToOne
+    @JoinColumn(name = "crop_id", nullable = false)
+    private CropEntity crop;
     @OneToMany(mappedBy = "fields", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<MonitoringLogServiceEntity> logServices;
+    @ManyToMany
+    @JoinTable(
+            name = "field_staff",
+            joinColumns = @JoinColumn(name = "field_id"),
+            inverseJoinColumns = @JoinColumn(name = "staff_id")
+    )
+    private List<StaffEntity> staffMembers;
 }
