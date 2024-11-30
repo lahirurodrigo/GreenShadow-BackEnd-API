@@ -1,7 +1,9 @@
 package lk.ijse.greenshadowbackendapi.service.impl;
 
 import jakarta.transaction.Transactional;
+import lk.ijse.greenshadowbackendapi.customStatusCode.SelectedEntityErrorStatus;
 import lk.ijse.greenshadowbackendapi.dao.CropDAO;
+import lk.ijse.greenshadowbackendapi.dto.CropStatus;
 import lk.ijse.greenshadowbackendapi.dto.impl.CropDTO;
 import lk.ijse.greenshadowbackendapi.entity.CropEntity;
 import lk.ijse.greenshadowbackendapi.exception.CropNotFoundException;
@@ -38,12 +40,12 @@ public class CropServiceImpl implements CropService {
     }
 
     @Override
-    public CropDTO getCrop(String cropCode){
+    public CropStatus getCrop(String cropCode){
         if(cropDAO.existsById(cropCode)){
             CropEntity selectedCrop = cropDAO.getReferenceById(cropCode);
             return mapping.toCropDTO(selectedCrop);
         }else{
-            return null;
+            return new SelectedEntityErrorStatus(2, "Crop with code " + cropCode + "not found!");
         }
     }
 
