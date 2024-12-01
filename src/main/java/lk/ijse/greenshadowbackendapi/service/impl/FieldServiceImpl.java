@@ -84,6 +84,7 @@ public class FieldServiceImpl implements FieldService {
             tempField.get().setFieldSize(fieldDTO.getFieldSize());
             tempField.get().setFieldImage01(fieldDTO.getFieldImage01());
             tempField.get().setFieldImage02(fieldDTO.getFieldImage02());
+            tempField.get().setCrop(mapping.toCropEntity(fieldDTO.getCrop()));
         }else {
             throw new FieldNotFoundException("Field with id " + fieldCode + " not Found");
         }
