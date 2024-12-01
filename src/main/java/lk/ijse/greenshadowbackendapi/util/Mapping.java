@@ -1,9 +1,11 @@
 package lk.ijse.greenshadowbackendapi.util;
 
 import lk.ijse.greenshadowbackendapi.dto.impl.CropDTO;
+import lk.ijse.greenshadowbackendapi.dto.impl.EquipmentDTO;
 import lk.ijse.greenshadowbackendapi.dto.impl.FieldDTO;
 import lk.ijse.greenshadowbackendapi.dto.impl.StaffDTO;
 import lk.ijse.greenshadowbackendapi.entity.CropEntity;
+import lk.ijse.greenshadowbackendapi.entity.EquipmentEntity;
 import lk.ijse.greenshadowbackendapi.entity.FieldEntity;
 import lk.ijse.greenshadowbackendapi.entity.StaffEntity;
 import org.modelmapper.ModelMapper;
@@ -65,5 +67,22 @@ public class Mapping {
     // staffEntityList to staffDTOList
     public List<StaffDTO> toStaffDTOList(List<StaffEntity> staffEntityList) {
         return modelMapper.map(staffEntityList, new TypeToken<List<StaffDTO>>() {}.getType());
+    }
+
+    // Equipment related mapping
+
+    // EquipmentDTO to EquipmentEntity
+    public EquipmentEntity toEquipmentEntity(EquipmentDTO equipmentDTO) {
+        return modelMapper.map(equipmentDTO, EquipmentEntity.class);
+    }
+
+    // EquipmentEntity to EquipmentDTO
+    public EquipmentDTO toEquipmentDTO(EquipmentEntity equipmentEntity) {
+        return modelMapper.map(equipmentEntity, EquipmentDTO.class);
+    }
+
+    // EquipmentEntityList to EquipmentDTOList
+    public List<EquipmentDTO> toEquipmentDTOList(List<EquipmentEntity> equipmentEntityList) {
+        return modelMapper.map(equipmentEntityList, new TypeToken<List<EquipmentDTO>>() {}.getType());
     }
 }
