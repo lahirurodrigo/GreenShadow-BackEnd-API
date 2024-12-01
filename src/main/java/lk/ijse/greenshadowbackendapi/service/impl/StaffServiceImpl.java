@@ -28,7 +28,7 @@ public class StaffServiceImpl implements StaffService {
 
     @Override
     public void saveStaff(StaffDTO staffDTO) throws DataPersistException {
-        // Check if the staff already exists
+        // Check if the staffId already exists
         if (staffDAO.existsById(staffDTO.getStaffId())) {
             throw new DataPersistException("Staff with the same ID already exists!");
         }
