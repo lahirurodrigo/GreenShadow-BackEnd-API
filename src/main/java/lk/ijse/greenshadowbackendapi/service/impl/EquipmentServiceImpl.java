@@ -65,8 +65,8 @@ public class EquipmentServiceImpl implements EquipmentService {
         equipmentEntity.setEquipmentName(equipmentDTO.getEquipmentName());
         equipmentEntity.setEquipmentType(equipmentDTO.getEquipmentType());
         equipmentEntity.setStatus(equipmentDTO.getStatus());
-        equipmentEntity.setStaff(equipmentDTO.getStaff());
-        equipmentEntity.setFields(equipmentDTO.getFields());
+        equipmentEntity.setStaff(mapping.toStaffEntity(equipmentDTO.getStaff()));
+        equipmentEntity.setFields(mapping.toFieldEntity(equipmentDTO.getFields()));
 
         // Save the updated entity
         equipmentDAO.save(equipmentEntity);
