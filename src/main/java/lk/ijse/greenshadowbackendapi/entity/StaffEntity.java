@@ -40,4 +40,6 @@ public class StaffEntity {
     private List<VehicleEntity> vehicles;
     @ManyToMany(mappedBy = "staffMembers")
     private List<FieldEntity> fields;
+    @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<EquipmentEntity> equipments;
 }
