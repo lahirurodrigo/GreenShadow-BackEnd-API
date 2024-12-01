@@ -34,4 +34,6 @@ public class FieldEntity {
             inverseJoinColumns = @JoinColumn(name = "staff_id")
     )
     private List<StaffEntity> staffMembers;
+    @OneToMany(mappedBy = "fields", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<EquipmentEntity> equipments;
 }

@@ -19,7 +19,7 @@ public class EquipmentEntity {
     @ManyToOne
     @JoinColumn(name = "staffId", nullable = false)
     private StaffEntity staff;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "fieldCode", nullable = false)
     private FieldEntity fields;
 }
