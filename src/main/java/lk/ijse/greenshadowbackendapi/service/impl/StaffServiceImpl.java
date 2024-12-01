@@ -10,7 +10,6 @@ import lk.ijse.greenshadowbackendapi.exception.StaffNotFoundException;
 import lk.ijse.greenshadowbackendapi.service.StaffService;
 import lk.ijse.greenshadowbackendapi.util.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

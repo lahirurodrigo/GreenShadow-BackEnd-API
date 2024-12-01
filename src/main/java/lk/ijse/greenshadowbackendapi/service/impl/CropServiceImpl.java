@@ -1,6 +1,5 @@
 package lk.ijse.greenshadowbackendapi.service.impl;
 
-import jakarta.transaction.Transactional;
 import lk.ijse.greenshadowbackendapi.customStatusCode.SelectedEntityErrorStatus;
 import lk.ijse.greenshadowbackendapi.dao.CropDAO;
 import lk.ijse.greenshadowbackendapi.dto.CropStatus;
@@ -12,6 +11,7 @@ import lk.ijse.greenshadowbackendapi.service.CropService;
 import lk.ijse.greenshadowbackendapi.util.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
