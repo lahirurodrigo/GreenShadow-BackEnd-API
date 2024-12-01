@@ -25,20 +25,31 @@ public class CropServiceImpl implements CropService {
     @Autowired
     private Mapping mapping;
 
+    // Save Crops
     @Override
     public void saveCrop(CropDTO cropDTO) throws DataPersistException {
+
+        // Check if the cropCode already exists
+        if (cropDAO.existsById(cropDTO.getCropCode())) {
+            throw new DataPersistException("Crop with the same Code already exists!");
+        }
+
+        // Convert DTO to Entity and Save
         CropEntity savedCrop = cropDAO.save(mapping.toCropEntity(cropDTO));
         if (savedCrop == null) {
             throw new DataPersistException("Crop not saved!");
         }
     }
 
+    //Get All Crops
     @Override
     public List<CropDTO> getAllCrops(){
+        // Get all cropEntities and convert to DTOs and return
         List<CropEntity> allCrops = cropDAO.findAll();
         return mapping.toCropDTOList(allCrops);
     }
 
+    // Get Crop by Code
     @Override
     public CropStatus getCrop(String cropCode){
         if(cropDAO.existsById(cropCode)){
@@ -49,6 +60,7 @@ public class CropServiceImpl implements CropService {
         }
     }
 
+    // Delete Crop
     @Override
     public void deleteCrop(String cropCode){
         if (cropDAO.existsById(cropCode)) {
@@ -58,6 +70,7 @@ public class CropServiceImpl implements CropService {
         }
     }
 
+    // Update Crop
     @Override
     public void updateCrop(String cropCode, CropDTO cropDTO){
         Optional<CropEntity> existedCrop = cropDAO.findById(cropCode);
