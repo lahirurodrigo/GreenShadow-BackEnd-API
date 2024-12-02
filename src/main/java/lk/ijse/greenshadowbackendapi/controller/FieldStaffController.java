@@ -22,7 +22,7 @@ public class FieldStaffController {
     private FieldStaffServiceImpl fieldStaffService;
 
     // Add staff members to a field
-    @PostMapping
+    @PostMapping({"/{fieldId}"})
     public ResponseEntity<Void> addStaffToField(
             @PathVariable String fieldId,
             @RequestBody List<String> staffIds) {
@@ -30,6 +30,7 @@ public class FieldStaffController {
             fieldStaffService.addStaffToField(fieldId, staffIds);
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (FieldNotFoundException e) {
+            e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (StaffNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -58,7 +59,7 @@ public class FieldStaffController {
     }
 
     //  Get all staff members associated with a field
-    @GetMapping
+    @GetMapping("/{fieldId}")
     public ResponseEntity<List<FieldStaffDTO>> getStaffForField(
             @PathVariable String fieldId) {
         try {
@@ -71,6 +72,7 @@ public class FieldStaffController {
                     .collect(Collectors.toList());
             return new ResponseEntity<>(staffDTOs, HttpStatus.OK);
         } catch (Exception e) {
+            e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
