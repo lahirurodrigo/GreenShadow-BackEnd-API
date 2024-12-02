@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class CropDTO implements SuperDTO, CropStatus{
+public class CropDTO implements CropStatus{
     private String cropCode;
     private String cropCommonName;
     private String cropScientificName;

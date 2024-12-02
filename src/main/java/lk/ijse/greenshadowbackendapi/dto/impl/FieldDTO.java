@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class FieldDTO implements SuperDTO, FieldStatus {
+public class FieldDTO implements FieldStatus {
     private String fieldCode;
     private String fieldName;
     private String fieldLocation;
