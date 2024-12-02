@@ -18,6 +18,10 @@ public class AppUtil {
         return Base64.getEncoder().encodeToString(bytesCropImage);
     }
 
+    public static String monitoringLogImageToBase64(byte[] bytesMonitoringLogImage) {
+        return Base64.getEncoder().encodeToString(bytesMonitoringLogImage);
+    }
+
     public static String generateCropCode() {
         return "FIELD-"+ UUID.randomUUID();
     }
