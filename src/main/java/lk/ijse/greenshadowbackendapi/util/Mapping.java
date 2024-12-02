@@ -96,4 +96,21 @@ public class Mapping {
     public List<VehicleDTO> toVehicleDTOList(List<VehicleEntity> vehicleEntityList) {
         return modelMapper.map(vehicleEntityList, new TypeToken<List<VehicleDTO>>() {}.getType());
     }
+
+    // MonitoringLog related mapping
+
+    // MonitoringLogDTO to MonitoringLogEntity
+    public MonitoringLogEntity toMonitoringLogEntity(MonitoringLogDTO monitoringLogDTO) {
+        return modelMapper.map(monitoringLogDTO, MonitoringLogEntity.class);
+    }
+
+    // MonitoringLogEntity to MonitoringLogDTO
+    public MonitoringLogDTO toMonitoringLogDTO(MonitoringLogEntity monitoringLogEntity) {
+        return modelMapper.map(monitoringLogEntity, MonitoringLogDTO.class);
+    }
+
+    // MonitoringLogEntityList to MonitoringLogDTOList
+    public List<MonitoringLogDTO> toMonitoringLogDTOList(List<MonitoringLogEntity> monitoringLogEntityList) {
+        return modelMapper.map(monitoringLogEntityList, new TypeToken<List<MonitoringLogDTO>>() {}.getType());
+    }
 }
