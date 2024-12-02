@@ -9,6 +9,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/v1/vehicle")
 @CrossOrigin
@@ -30,5 +32,11 @@ public class VehicleController {
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    // Get all vehicles
+    @GetMapping
+    public List<VehicleDTO> getAllVehicles() {
+        return vehicleService.getAllVehicles();
     }
 }
