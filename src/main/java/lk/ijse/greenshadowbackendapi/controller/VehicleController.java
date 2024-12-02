@@ -3,6 +3,7 @@ package lk.ijse.greenshadowbackendapi.controller;
 import lk.ijse.greenshadowbackendapi.dto.VehicleStatus;
 import lk.ijse.greenshadowbackendapi.dto.impl.VehicleDTO;
 import lk.ijse.greenshadowbackendapi.exception.DataPersistException;
+import lk.ijse.greenshadowbackendapi.exception.VehicleNotFoundException;
 import lk.ijse.greenshadowbackendapi.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -45,5 +46,22 @@ public class VehicleController {
     @GetMapping("/{vehicleCode}")
     public VehicleStatus getVehicleByCode(@PathVariable String vehicleCode) {
         return vehicleService.getVehicle(vehicleCode);
+    }
+
+    // Update vehicle details
+    @PutMapping("/{vehicleCode}")
+    public ResponseEntity<Void> updateVehicle(
+            @PathVariable String vehicleCode,
+            @RequestBody VehicleDTO vehicleDTO
+    ) {
+        try {
+            // Update vehicle details
+            vehicleService.updateVehicle(vehicleCode, vehicleDTO);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (VehicleNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
