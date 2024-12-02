@@ -12,7 +12,7 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "monitoring_log_service")
-public class MonitoringLogServiceEntity {
+public class MonitoringLogEntity {
     @Id
     private String logCode;
     private Date logDate;

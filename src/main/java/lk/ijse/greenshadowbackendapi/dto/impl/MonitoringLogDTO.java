@@ -10,7 +10,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class MonitoringLogServiceDTO implements SuperDTO {
+public class MonitoringLogDTO implements SuperDTO {
     private String logCode;
     private Date logDate;
     private String logDetails;
