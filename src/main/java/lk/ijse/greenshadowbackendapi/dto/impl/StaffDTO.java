@@ -14,7 +14,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class StaffDTO implements SuperDTO, StaffStatus {
+public class StaffDTO implements StaffStatus {
     private String staffId;
     private String firstName;
     private String lastName;
