@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class VehicleServiceImpl implements VehicleService {
@@ -35,6 +37,12 @@ public class VehicleServiceImpl implements VehicleService {
         if (savedVehicle == null) {
             throw new DataPersistException("Vehicle not saved!");
         }
+    }
+
+    @Override
+    public List<VehicleDTO> getAllVehicles() {
+        List<VehicleEntity> allVehicles = vehicleDAO.findAll();
+        return mapping.toVehicleDTOList(allVehicles);
     }
 
 }
