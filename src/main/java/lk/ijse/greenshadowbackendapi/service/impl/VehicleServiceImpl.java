@@ -1,6 +1,8 @@
 package lk.ijse.greenshadowbackendapi.service.impl;
 
+import lk.ijse.greenshadowbackendapi.customStatusCode.SelectedEntityErrorStatus;
 import lk.ijse.greenshadowbackendapi.dao.VehicleDAO;
+import lk.ijse.greenshadowbackendapi.dto.VehicleStatus;
 import lk.ijse.greenshadowbackendapi.dto.impl.VehicleDTO;
 import lk.ijse.greenshadowbackendapi.entity.VehicleEntity;
 import lk.ijse.greenshadowbackendapi.exception.DataPersistException;
@@ -43,6 +45,16 @@ public class VehicleServiceImpl implements VehicleService {
     public List<VehicleDTO> getAllVehicles() {
         List<VehicleEntity> allVehicles = vehicleDAO.findAll();
         return mapping.toVehicleDTOList(allVehicles);
+    }
+
+    @Override
+    public VehicleStatus getVehicle(String vehicleCode) {
+        if (vehicleDAO.existsById(vehicleCode)) {
+            VehicleEntity selectedVehicle = vehicleDAO.getReferenceById(vehicleCode);
+            return mapping.toVehicleDTO(selectedVehicle);
+        } else {
+            return new SelectedEntityErrorStatus(2, "Vehicle with code " + vehicleCode + " not found!");
+        }
     }
 
 }
