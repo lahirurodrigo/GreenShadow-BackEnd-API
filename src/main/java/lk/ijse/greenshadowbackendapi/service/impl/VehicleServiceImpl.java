@@ -6,6 +6,7 @@ import lk.ijse.greenshadowbackendapi.dto.VehicleStatus;
 import lk.ijse.greenshadowbackendapi.dto.impl.VehicleDTO;
 import lk.ijse.greenshadowbackendapi.entity.VehicleEntity;
 import lk.ijse.greenshadowbackendapi.exception.DataPersistException;
+import lk.ijse.greenshadowbackendapi.exception.VehicleNotFoundException;
 import lk.ijse.greenshadowbackendapi.service.VehicleService;
 import lk.ijse.greenshadowbackendapi.util.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +55,15 @@ public class VehicleServiceImpl implements VehicleService {
             return mapping.toVehicleDTO(selectedVehicle);
         } else {
             return new SelectedEntityErrorStatus(2, "Vehicle with code " + vehicleCode + " not found!");
+        }
+    }
+
+    @Override
+    public void deleteVehicle(String vehicleCode) {
+        if (vehicleDAO.existsById(vehicleCode)) {
+            vehicleDAO.deleteById(vehicleCode);
+        } else {
+            throw new VehicleNotFoundException("Vehicle with code " + vehicleCode + " not Found");
         }
     }
 
