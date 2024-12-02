@@ -1,5 +1,6 @@
 package lk.ijse.greenshadowbackendapi.controller;
 
+import lk.ijse.greenshadowbackendapi.dto.VehicleStatus;
 import lk.ijse.greenshadowbackendapi.dto.impl.VehicleDTO;
 import lk.ijse.greenshadowbackendapi.exception.DataPersistException;
 import lk.ijse.greenshadowbackendapi.service.VehicleService;
@@ -38,5 +39,11 @@ public class VehicleController {
     @GetMapping
     public List<VehicleDTO> getAllVehicles() {
         return vehicleService.getAllVehicles();
+    }
+
+    // Get a vehicle by vehicleCode
+    @GetMapping("/{vehicleCode}")
+    public VehicleStatus getVehicleByCode(@PathVariable String vehicleCode) {
+        return vehicleService.getVehicle(vehicleCode);
     }
 }
