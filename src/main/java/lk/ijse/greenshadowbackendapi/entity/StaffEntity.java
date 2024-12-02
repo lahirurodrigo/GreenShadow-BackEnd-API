@@ -36,10 +36,6 @@ public class StaffEntity {
     private Role role;
     @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<MonitoringLogServiceEntity> logServices;
-    @OneToOne(mappedBy = "staff", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private VehicleEntity vehicles;
     @ManyToMany(mappedBy = "staffMembers")
     private List<FieldEntity> fields;
-    @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<EquipmentEntity> equipments;
 }
