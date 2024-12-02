@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -64,6 +65,31 @@ public class VehicleServiceImpl implements VehicleService {
             vehicleDAO.deleteById(vehicleCode);
         } else {
             throw new VehicleNotFoundException("Vehicle with code " + vehicleCode + " not Found");
+        }
+    }
+
+    @Override
+    public void updateVehicle(String vehicleCode, VehicleDTO vehicleDTO) {
+        if (!vehicleDAO.existsById(vehicleCode)) {
+            throw new VehicleNotFoundException("Vehicle with code " + vehicleCode + " not found");
+        }
+
+        // Find the existing vehicle entity by vehicleCode
+        Optional<VehicleEntity> existedVehicle = vehicleDAO.findById(vehicleCode);
+
+        if (existedVehicle.isPresent()) {
+            VehicleEntity vehicleEntity = existedVehicle.get();
+
+            // Set the updated values from VehicleDTO to the existing VehicleEntity
+            vehicleEntity.setLicensePlateNumber(vehicleDTO.getLicensePlateNumber());
+            vehicleEntity.setVehicleCategory(vehicleDTO.getVehicleCategory());
+            vehicleEntity.setFuelType(vehicleDTO.getFuelType());
+            vehicleEntity.setStatus(vehicleDTO.getStatus());
+            vehicleEntity.setRemarks(vehicleDTO.getRemarks());
+            vehicleEntity.setStaff(vehicleDTO.getStaff());
+            vehicleEntity.setAssistantId(vehicleDTO.getAssistantId());
+        } else {
+            throw new VehicleNotFoundException("Vehicle with code " + vehicleCode + " not found");
         }
     }
 
