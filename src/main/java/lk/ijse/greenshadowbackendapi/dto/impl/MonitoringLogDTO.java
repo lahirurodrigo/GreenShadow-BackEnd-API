@@ -1,7 +1,6 @@
 package lk.ijse.greenshadowbackendapi.dto.impl;
 
 import lk.ijse.greenshadowbackendapi.dto.MonitoringLogStatus;
-import lk.ijse.greenshadowbackendapi.dto.SuperDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
