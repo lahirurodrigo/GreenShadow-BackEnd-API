@@ -1,13 +1,7 @@
 package lk.ijse.greenshadowbackendapi.util;
 
-import lk.ijse.greenshadowbackendapi.dto.impl.CropDTO;
-import lk.ijse.greenshadowbackendapi.dto.impl.EquipmentDTO;
-import lk.ijse.greenshadowbackendapi.dto.impl.FieldDTO;
-import lk.ijse.greenshadowbackendapi.dto.impl.StaffDTO;
-import lk.ijse.greenshadowbackendapi.entity.CropEntity;
-import lk.ijse.greenshadowbackendapi.entity.EquipmentEntity;
-import lk.ijse.greenshadowbackendapi.entity.FieldEntity;
-import lk.ijse.greenshadowbackendapi.entity.StaffEntity;
+import lk.ijse.greenshadowbackendapi.dto.impl.*;
+import lk.ijse.greenshadowbackendapi.entity.*;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,5 +78,22 @@ public class Mapping {
     // EquipmentEntityList to EquipmentDTOList
     public List<EquipmentDTO> toEquipmentDTOList(List<EquipmentEntity> equipmentEntityList) {
         return modelMapper.map(equipmentEntityList, new TypeToken<List<EquipmentDTO>>() {}.getType());
+    }
+
+    // Vehicle related mapping
+
+    // VehicleDTO to VehicleEntity
+    public VehicleEntity toVehicleEntity(VehicleDTO vehicleDTO) {
+        return modelMapper.map(vehicleDTO, VehicleEntity.class);
+    }
+
+    // VehicleEntity to VehicleDTO
+    public VehicleDTO toVehicleDTO(VehicleEntity vehicleEntity) {
+        return modelMapper.map(vehicleEntity, VehicleDTO.class);
+    }
+
+    // VehicleEntityList to VehicleDTOList
+    public List<VehicleDTO> toVehicleDTOList(List<VehicleEntity> vehicleEntityList) {
+        return modelMapper.map(vehicleEntityList, new TypeToken<List<VehicleDTO>>() {}.getType());
     }
 }
