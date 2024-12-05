@@ -113,4 +113,12 @@ public class Mapping {
     public List<MonitoringLogDTO> toMonitoringLogDTOList(List<MonitoringLogEntity> monitoringLogEntityList) {
         return modelMapper.map(monitoringLogEntityList, new TypeToken<List<MonitoringLogDTO>>() {}.getType());
     }
+
+    // User related mappings
+
+    // userDTO to userEntity mapping
+    public UserEntity toUserEntity(UserDTO userDTO){ return modelMapper.map(userDTO, UserEntity.class); }
+
+    // userEntity to userDTO mapping
+    public UserDTO toUserDTO(UserEntity userEntity){ return modelMapper.map(userEntity, UserDTO.class); }
 }

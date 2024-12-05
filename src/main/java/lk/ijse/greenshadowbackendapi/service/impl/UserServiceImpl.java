@@ -4,6 +4,9 @@ import lk.ijse.greenshadowbackendapi.dao.UserDAO;
 import lk.ijse.greenshadowbackendapi.entity.UserEntity;
 import lk.ijse.greenshadowbackendapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
+import lk.ijse.greenshadowbackendapi.exception.UserNotFound;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -48,5 +51,13 @@ public class UserServiceImpl implements UserService {
         } else {
             throw new RuntimeException("User with email " + email + " not found!");
         }
+    }
+
+    @Override
+    public UserDetailsService userDetailsService() {
+
+        return userName ->
+                userRepository.findByEmail(userName)
+                        .orElseThrow(()-> new UserNotFound("User Not Found"));
     }
 }
