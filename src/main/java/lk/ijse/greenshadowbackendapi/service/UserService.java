@@ -1,6 +1,8 @@
 package lk.ijse.greenshadowbackendapi.service;
 
+import lk.ijse.greenshadowbackendapi.dto.impl.UserDTO;
 import lk.ijse.greenshadowbackendapi.entity.UserEntity;
+import lk.ijse.greenshadowbackendapi.exception.DataPersistException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
@@ -11,9 +13,9 @@ public interface UserService {
 
     Optional<UserEntity> getUserByEmail(String email);
 
-    void saveUser(UserEntity userEntity);
+    void saveUser(UserDTO userDTO) throws DataPersistException;
 
-    void updateUser(String email, UserEntity userEntity);
+    void updateUser(String email, UserDTO userDTO) throws DataPersistException;
 
     void deleteUser(String email);
 

@@ -29,7 +29,6 @@ public class StaffController {
     public ResponseEntity<StaffDTO> saveStaff(@RequestBody StaffDTO staffDTO) {
         try {
             // Save staff details
-            System.out.println("Received DOB: " + staffDTO.getDOB());
             staffService.saveStaff(staffDTO);
             return new ResponseEntity<>(staffDTO, HttpStatus.CREATED);
         } catch (DataPersistException e) {

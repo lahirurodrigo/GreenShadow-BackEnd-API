@@ -1,8 +1,11 @@
 package lk.ijse.greenshadowbackendapi.service.impl;
 
 import lk.ijse.greenshadowbackendapi.dao.UserDAO;
+import lk.ijse.greenshadowbackendapi.dto.impl.UserDTO;
 import lk.ijse.greenshadowbackendapi.entity.UserEntity;
+import lk.ijse.greenshadowbackendapi.exception.DataPersistException;
 import lk.ijse.greenshadowbackendapi.service.UserService;
+import lk.ijse.greenshadowbackendapi.util.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import lk.ijse.greenshadowbackendapi.exception.UserNotFound;
@@ -19,6 +22,8 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDAO userRepository;
+    @Autowired
+    private Mapping mapping;
 
     @Override
     public List<UserEntity> getAllUsers() {
@@ -31,16 +36,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void saveUser(UserEntity userEntity) {
-        userRepository.save(userEntity);
+    public void saveUser(UserDTO userDTO) throws DataPersistException {
+        // Check if the email already exists
+        if (userRepository.existsById(userDTO.getEmail())) {
+            throw new DataPersistException("User with the same email already exists!");
+        }
+        UserEntity userEntity= userRepository.save(mapping.toUserEntity(userDTO));
+
+        if(userEntity == null){
+            throw new DataPersistException("Failed to save user!");
+        }
     }
 
     @Override
-    public void updateUser(String email, UserEntity userEntity) {
+    public void updateUser(String email, UserDTO userDTO) {
         if (userRepository.existsById(email)) {
-            userRepository.save(userEntity);
+            userRepository.save(mapping.toUserEntity(userDTO));
         } else {
-            throw new RuntimeException("User with email " + email + " not found!");
+            throw new UserNotFound("User with email " + email + " not found!");
         }
     }
 
@@ -49,7 +62,7 @@ public class UserServiceImpl implements UserService {
         if (userRepository.existsById(email)) {
             userRepository.deleteById(email);
         } else {
-            throw new RuntimeException("User with email " + email + " not found!");
+            throw new UserNotFound("User with email " + email + " not found!");
         }
     }
 
