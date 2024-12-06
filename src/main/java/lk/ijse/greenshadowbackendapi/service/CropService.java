@@ -2,6 +2,7 @@ package lk.ijse.greenshadowbackendapi.service;
 
 import lk.ijse.greenshadowbackendapi.dto.CropStatus;
 import lk.ijse.greenshadowbackendapi.dto.impl.CropDTO;
+import lk.ijse.greenshadowbackendapi.entity.CropEntity;
 import lk.ijse.greenshadowbackendapi.exception.DataPersistException;
 
 import java.util.List;
@@ -16,4 +17,6 @@ public interface CropService {
     void deleteCrop(String cropCode);
 
     void updateCrop(String cropCode, CropDTO cropDTO);
+
+    List<CropEntity> getCropsByCategory(String category);
 }

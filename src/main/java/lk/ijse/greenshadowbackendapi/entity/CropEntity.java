@@ -21,9 +21,9 @@ public class CropEntity {
     private String cropImage;
     private String cropCategory;
     private String cropSeason;
-    @OneToMany(mappedBy = "crop", cascade = CascadeType.ALL)
-    private List<FieldEntity> fieldEntityList;
-    @OneToMany(mappedBy = "crop" ,cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<MonitoringLogEntity> logServices;
+//    @OneToMany(mappedBy = "crop", cascade = CascadeType.ALL)
+//    private List<FieldEntity> fieldEntityList;
+//    @OneToMany(mappedBy = "crop" ,cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private List<MonitoringLogEntity> logServices;
 
 }

@@ -3,6 +3,7 @@ package lk.ijse.greenshadowbackendapi.controller;
 import lk.ijse.greenshadowbackendapi.dto.CropStatus;
 import lk.ijse.greenshadowbackendapi.dto.impl.CropDTO;
 import lk.ijse.greenshadowbackendapi.dto.impl.FieldDTO;
+import lk.ijse.greenshadowbackendapi.entity.CropEntity;
 import lk.ijse.greenshadowbackendapi.exception.CropNotFoundException;
 import lk.ijse.greenshadowbackendapi.exception.DataPersistException;
 import lk.ijse.greenshadowbackendapi.service.CropService;
@@ -66,6 +67,11 @@ public class CropController {
     @GetMapping("/{code}")
     public CropStatus getCropById(@PathVariable String code) {
         return cropService.getCrop(code);
+    }
+
+    @GetMapping("/category")
+    public List<CropEntity> getCropsByCategory(@RequestParam String category) {
+        return cropService.getCropsByCategory(category);
     }
 
     // Update a crop

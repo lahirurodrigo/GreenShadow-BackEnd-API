@@ -85,4 +85,10 @@ public class CropServiceImpl implements CropService {
         }
     }
 
+    @Override
+    public List<CropEntity> getCropsByCategory(String category) {
+        // Using the custom query to fetch crops by category
+        return cropDAO.findByCategoryNative(category);
+    }
+
 }
