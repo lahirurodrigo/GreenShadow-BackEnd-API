@@ -31,29 +31,22 @@ public class EquipmentController {
     private FieldService fieldService;
 
     // Save equipment details
-    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<EquipmentDTO> saveEquipment(
-            @RequestParam("equipmentId") String equipmentId,
-            @RequestParam("equipmentName") String equipmentName,
-            @RequestParam("equipmentType") String equipmentType,
-            @RequestParam("status") String status,
-            @RequestParam("staffId") String staffId,
-            @RequestParam("fieldCode") String fieldCode
-    ) {
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<EquipmentDTO> saveEquipment(@RequestBody EquipmentDTO equipmentDTO) {
         try {
-            // Create the EquipmentDTO from the form parameters
-            EquipmentDTO equipmentDTO = new EquipmentDTO();
-            equipmentDTO.setEquipmentId(equipmentId);
-            equipmentDTO.setEquipmentName(equipmentName);
-            equipmentDTO.setEquipmentType(equipmentType);
-            equipmentDTO.setStatus(status);
-
-            // Get the staff and field details
-            StaffDTO staff = (StaffDTO) staffService.getStaff(staffId);
-            FieldDTO field = (FieldDTO) fieldService.getField(fieldCode);
-
-            equipmentDTO.setStaff(staff);
-            equipmentDTO.setFields(field);
+//            // Create the EquipmentDTO from the form parameters
+//            EquipmentDTO equipmentDTO = new EquipmentDTO();
+//            equipmentDTO.setEquipmentId(equipmentId);
+//            equipmentDTO.setEquipmentName(equipmentName);
+//            equipmentDTO.setEquipmentType(equipmentType);
+//            equipmentDTO.setStatus(status);
+//
+//            // Get the staff and field details
+//            StaffDTO staff = (StaffDTO) staffService.getStaff(staffId);
+//            FieldDTO field = (FieldDTO) fieldService.getField(fieldCode);
+//
+//            equipmentDTO.setStaff(staff);
+//            equipmentDTO.setFields(field);
 
             // Save equipment details using the service
             equipmentService.saveEquipment(equipmentDTO);
@@ -90,27 +83,23 @@ public class EquipmentController {
     @PutMapping("/{id}")
     public ResponseEntity<EquipmentDTO> updateEquipment(
             @PathVariable String id,
-            @RequestParam("equipmentName") String equipmentName,
-            @RequestParam("equipmentType") String equipmentType,
-            @RequestParam("status") String status,
-            @RequestParam("staffId") String staffId,
-            @RequestParam("fieldCode") String fieldCode
+            @RequestBody EquipmentDTO equipmentDTO
     ) {
         try {
-            // Create the EquipmentDTO from the form parameters
-            EquipmentDTO equipmentDTO = new EquipmentDTO();
-            equipmentDTO.setEquipmentId(id);
-            equipmentDTO.setEquipmentName(equipmentName);
-            equipmentDTO.setEquipmentType(equipmentType);
-            equipmentDTO.setStatus(status);
+//            // Create the EquipmentDTO from the form parameters
+//            EquipmentDTO equipmentDTO = new EquipmentDTO();
+//            equipmentDTO.setEquipmentId(id);
+//            equipmentDTO.setEquipmentName(equipmentName);
+//            equipmentDTO.setEquipmentType(equipmentType);
+//            equipmentDTO.setStatus(status);
 
-            // Fetch the related Staff and Field entities using the provided staffId and fieldCode
-            StaffDTO staff = (StaffDTO) staffService.getStaff(staffId);
-            FieldDTO field = (FieldDTO) fieldService.getField(fieldCode);
-
-            // Set the Staff and Field DTOs to the EquipmentDTO
-            equipmentDTO.setStaff(staff);
-            equipmentDTO.setFields(field);
+//            // Fetch the related Staff and Field entities using the provided staffId and fieldCode
+//            StaffDTO staff = (StaffDTO) staffService.getStaff(staffId);
+//            FieldDTO field = (FieldDTO) fieldService.getField(fieldCode);
+//
+//            // Set the Staff and Field DTOs to the EquipmentDTO
+//            equipmentDTO.setStaff(staff);
+//            equipmentDTO.setFields(field);
 
             // Update equipment details using the service
             equipmentService.updateEquipment(id, equipmentDTO);
