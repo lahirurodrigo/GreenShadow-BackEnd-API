@@ -4,7 +4,9 @@ import lk.ijse.greenshadowbackendapi.dto.impl.UserDTO;
 import lk.ijse.greenshadowbackendapi.entity.UserEntity;
 import lk.ijse.greenshadowbackendapi.exception.DataPersistException;
 import lk.ijse.greenshadowbackendapi.exception.UserNotFound;
+import lk.ijse.greenshadowbackendapi.response.JWTAuthResponse;
 import lk.ijse.greenshadowbackendapi.service.UserService;
+import lk.ijse.greenshadowbackendapi.service.impl.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,8 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private AuthenticationService authenticationService;
 
     // Get all users
     @GetMapping
@@ -34,14 +38,14 @@ public class UserController {
 
     // Save a new user
     @PostMapping
-    public ResponseEntity<UserDTO> saveUser(@RequestBody UserDTO userDTO) {
-        try{
-            userService.saveUser(userDTO);
-            return new ResponseEntity<UserDTO>(HttpStatus.CREATED);
-        }catch (DataPersistException e){
-            return new ResponseEntity<UserDTO>(HttpStatus.BAD_REQUEST);
+    public ResponseEntity<JWTAuthResponse> saveUser(@RequestBody UserDTO userDTO) {
+        try {
+            return ResponseEntity.ok(authenticationService.signUp(userDTO));
+        }catch (UserNotFound e){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }catch (Exception e){
-            return new ResponseEntity<UserDTO>(HttpStatus.INTERNAL_SERVER_ERROR);
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
