@@ -1,7 +1,6 @@
 package lk.ijse.greenshadowbackendapi.dto.impl;
 
 import lk.ijse.greenshadowbackendapi.dto.VehicleStatus;
-import lk.ijse.greenshadowbackendapi.entity.StaffEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,6 +15,6 @@ public class VehicleDTO implements VehicleStatus {
     private String fuelType;
     private String status;
     private String remarks;
-    private StaffEntity staff;
+    private StaffDTO staff;
     private String assistantId;
 }

@@ -1,6 +1,7 @@
 package lk.ijse.greenshadowbackendapi.service.impl;
 
 import lk.ijse.greenshadowbackendapi.customStatusCode.SelectedEntityErrorStatus;
+import lk.ijse.greenshadowbackendapi.dao.StaffDAO;
 import lk.ijse.greenshadowbackendapi.dao.VehicleDAO;
 import lk.ijse.greenshadowbackendapi.dto.VehicleStatus;
 import lk.ijse.greenshadowbackendapi.dto.impl.VehicleDTO;
@@ -22,6 +23,9 @@ public class VehicleServiceImpl implements VehicleService {
 
     @Autowired
     private VehicleDAO vehicleDAO;
+
+    @Autowired
+    private StaffDAO staffDAO;
 
     @Autowired
     private Mapping mapping;
@@ -86,7 +90,7 @@ public class VehicleServiceImpl implements VehicleService {
             vehicleEntity.setFuelType(vehicleDTO.getFuelType());
             vehicleEntity.setStatus(vehicleDTO.getStatus());
             vehicleEntity.setRemarks(vehicleDTO.getRemarks());
-            vehicleEntity.setStaff(vehicleDTO.getStaff());
+            vehicleEntity.setStaff(mapping.toStaffEntity(vehicleDTO.getStaff()));
             vehicleEntity.setAssistantId(vehicleDTO.getAssistantId());
         } else {
             throw new VehicleNotFoundException("Vehicle with code " + vehicleCode + " not found");
