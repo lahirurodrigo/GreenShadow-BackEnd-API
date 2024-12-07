@@ -2,6 +2,7 @@ package lk.ijse.greenshadowbackendapi.service.impl;
 
 import lk.ijse.greenshadowbackendapi.dao.FieldDAO;
 import lk.ijse.greenshadowbackendapi.dao.StaffDAO;
+import lk.ijse.greenshadowbackendapi.dto.impl.FieldStaffDTO;
 import lk.ijse.greenshadowbackendapi.entity.FieldEntity;
 import lk.ijse.greenshadowbackendapi.entity.StaffEntity;
 import lk.ijse.greenshadowbackendapi.exception.DataPersistException;
@@ -88,5 +89,4 @@ public class FieldStaffServiceImpl implements FieldStaffService {
                 .map(staff -> staff.getStaffId())
                 .collect(Collectors.toList());
     }
-
 }
