@@ -13,8 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -94,5 +96,19 @@ public class StaffServiceImpl implements StaffService {
             staffEntity.setContactNo(staffDTO.getContactNo());
             staffEntity.setEmail(staffDTO.getEmail());
             staffEntity.setRole(staffDTO.getRole());
+    }
+
+    @Override
+    public List<StaffDTO> getSortedStaffList() {
+        List<StaffEntity> staffList = staffDAO.findAll();
+        List<StaffDTO> staffDTOList = mapping.toStaffDTOList(staffList); // Convert List<StaffEntity> to List<StaffDTO>
+
+
+        // Sorting by first name only
+        List<StaffDTO> sortedList = staffDTOList.stream()
+                .sorted(Comparator.comparing(StaffDTO::getFirstName))
+                .collect(Collectors.toList());
+
+        return sortedList;  // Return the sorted list
     }
 }

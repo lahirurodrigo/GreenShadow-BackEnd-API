@@ -17,6 +17,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -40,6 +41,7 @@ public class MonitoringLogController {
     @Autowired
     CropService cropService;
 
+    @PreAuthorize("hasRole('MANAGER') or hasRole('SCIENTIST')")
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> saveMonitoringLog(
             @RequestParam("logCode") String logCode,
@@ -73,12 +75,14 @@ public class MonitoringLogController {
     }
 
     // Get all monitoring logs
+    @PreAuthorize("hasRole('MANAGER') or hasRole('SCIENTIST')")
     @GetMapping
     public List<MonitoringLogDTO> getAllMonitoringLogs() {
         return monitoringLogService.getAllMonitoringLogs();
     }
 
     // Get a monitoring log by ID
+    @PreAuthorize("hasRole('MANAGER') or hasRole('SCIENTIST')")
     @GetMapping("/{logCode}")
     public MonitoringLogStatus getMonitoringLogById(@PathVariable String logCode) {
         return monitoringLogService.getMonitoringLog(logCode);
@@ -86,6 +90,7 @@ public class MonitoringLogController {
 
     // Update a monitoring log
     @PutMapping("/{logCode}")
+    @PreAuthorize("hasRole('MANAGER') or hasRole('SCIENTIST')")
     public ResponseEntity<MonitoringLogDTO> updateMonitoringLog(
             @PathVariable("logCode") String logCode,
             @RequestParam("logDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date logDate,
@@ -119,6 +124,7 @@ public class MonitoringLogController {
 
     // Delete a monitoring log
     @DeleteMapping("/{logCode}")
+    @PreAuthorize("hasRole('MANAGER') or hasRole('SCIENTIST')")
     public ResponseEntity<Void> deleteMonitoringLog(@PathVariable String logCode) {
         try {
             monitoringLogService.deleteMonitoringLog(logCode);

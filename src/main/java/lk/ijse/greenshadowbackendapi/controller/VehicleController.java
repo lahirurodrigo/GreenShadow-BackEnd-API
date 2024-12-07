@@ -30,10 +30,8 @@ public class VehicleController {
             vehicleService.saveVehicle(vehicleDTO);
             return new ResponseEntity<>(vehicleDTO, HttpStatus.CREATED);
         } catch (DataPersistException e) {
-            e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
-            e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

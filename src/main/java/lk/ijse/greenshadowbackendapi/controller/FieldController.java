@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,6 +28,7 @@ public class FieldController {
     @Autowired
     CropService cropService;
 
+    @PreAuthorize("hasRole('MANAGER') or hasRole('SCIENTIST')")
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> saveField(
             @RequestParam("fieldCode")String id,
@@ -65,18 +67,21 @@ public class FieldController {
 
 
     // Get all fields
+    @PreAuthorize("hasRole('MANAGER') or hasRole('SCIENTIST')")
     @GetMapping
     public List<FieldDTO> getAllFields() {
         return fieldService.getAllFields();
     }
 
     // Get a field by ID
+    @PreAuthorize("hasRole('MANAGER') or hasRole('SCIENTIST')")
     @GetMapping("/{id}")
     public FieldStatus getFieldById(@PathVariable String id) {
         return fieldService.getField(id);
     }
 
     // Update a field
+    @PreAuthorize("hasRole('MANAGER') or hasRole('SCIENTIST')")
     @PutMapping("/{fieldCode}")
     public ResponseEntity<FieldDTO> updateField(
             @PathVariable("fieldCode") String fieldCode,
@@ -114,6 +119,7 @@ public class FieldController {
     }
 
     // Delete a field
+    @PreAuthorize("hasRole('MANAGER') or hasRole('SCIENTIST')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteField(@PathVariable String id) {
         try {

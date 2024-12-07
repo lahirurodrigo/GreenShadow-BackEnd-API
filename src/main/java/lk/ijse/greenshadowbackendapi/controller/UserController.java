@@ -30,7 +30,7 @@ public class UserController {
     }
 
     // Get user by email
-    @GetMapping("/{email}")
+    @GetMapping(value = "/{email}", produces = "application/json")
     public UserEntity getUserByEmail(@PathVariable String email) {
         return userService.getUserByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User with email " + email + " not found!"));

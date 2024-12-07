@@ -1,5 +1,5 @@
 package lk.ijse.greenshadowbackendapi.util;
 
 public enum Role {
-    ADMIN, MANAGER, SCIENTIST, EMPLOYEE
+    ADMIN, MANAGER, SCIENTIST, WORKER
 }

@@ -79,4 +79,9 @@ public class StaffController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/sorted")
+    public List<StaffDTO> getSortedStaffList() {
+        return staffService.getSortedStaffList();
+    }
 }
